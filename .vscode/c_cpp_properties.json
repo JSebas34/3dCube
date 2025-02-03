@@ -1,0 +1,47 @@
+{
+    "version": 4,
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/glad_mac",  // macOS-specific GLAD headers
+                "${workspaceFolder}/include/KHR"       // Shared KHR headers
+            ],
+            "defines": [],
+            "intelliSenseMode": "macos-gcc-x64",
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/include",
+                    "${workspaceFolder}/include/glad_mac",
+                    "${workspaceFolder}/include/KHR"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "Windows",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/include/glad_windows",  // Windows-specific GLAD headers
+                "${workspaceFolder}/include/KHR"           // Shared KHR headers
+            ],
+            "defines": [],
+            "intelliSenseMode": "windows-msvc-x64",
+            "compilerPath": "C:/MinGW/bin/g++.exe",   // Update with your compiler path on Windows
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/include",
+                    "${workspaceFolder}/include/glad_windows",
+                    "${workspaceFolder}/include/KHR"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ]
+}
