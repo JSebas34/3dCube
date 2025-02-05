@@ -1,10 +1,11 @@
-#include <glad/glad.h>
+#include <glad.h>
 #include "SFML/Graphics.hpp"
 #include <SFML/OpenGL.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <functions.cpp>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ int main()
                 break;
             }
         }
-    }
+    
     
     float vertices[] = {
             0.0f, 0.5f,
@@ -67,23 +68,12 @@ int main()
     glLinkProgram(shaderProgram);       //link the shaders to the prgram after being attatched
     glUseProgram(shaderProgram);        //use program
 
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
     GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 
+    glVertexAttribPointer(posAttrib,3,GL_FLOAT,GL_FALSE,);
     return 0;
 }
-
-string loadShader(const string& filePath) {
-    ifstream shaderfile(filePath);
-
-    if (!shaderfile.is_open()) {
-        cout << "Failed to open file :(" << filePath << endl;
-        return "";
-    }
-
-    stringstream filebuffer;
-
-    filebuffer << shaderfile.rdbuf();
-    shaderfile.close();
-
-    return filebuffer.str();
 }
