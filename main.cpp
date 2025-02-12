@@ -18,6 +18,17 @@ int main()
 
     bool running = true;
 
+    GLuint vbo; //unsingned int
+    GLuint VAO;
+
+    glGenBuffers(1, &vbo);      //generate buffer
+
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);     //activate/bind buffer to target
+
+
     while (running) {
         sf::Event event;
 
@@ -36,14 +47,6 @@ int main()
             0.5f, -0.5f,
             -0.5, -0.5f
     };
-
-    GLuint vbo; //unsingned int
-
-    glGenBuffers(1, &vbo);      //generate buffer
-
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);     //activate/bind buffer to target
-
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);      //put data into the buffer
 
 
     string vertexCode = loadShader("Vshader.glsl");
@@ -66,14 +69,20 @@ int main()
     glAttachShader(shaderProgram, fragmentShader);
 
     glLinkProgram(shaderProgram);       //link the shaders to the prgram after being attatched
-    glUseProgram(shaderProgram);        //use program
 
-    glDeleteShader(vertexShader);
+    glDeleteShader(vertexShader);       //delete shaders since they are now in the program and rendered unnecessary
     glDeleteShader(fragmentShader);
 
-    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");   //pos of atributtes
 
-    glVertexAttribPointer(posAttrib,3,GL_FLOAT,GL_FALSE,);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);      //put data into the buffer
+
+    glVertexAttribPointer(posAttrib,2,GL_FLOAT,GL_FALSE,0,(void*)0);    //specifies how to interpret vbd when drawing calls
+    glEnableVertexAttribArray(posAttrib); //enables attributes
+
+    glUseProgram(shaderProgram);        //use program
+    glBindVertexArray(VAO);
+    glDrawArrays(GL_TRIANGLES,0, sizeof(vertices));
     return 0;
 }
 }

@@ -4,11 +4,8 @@
         {
             "label": "Build SFML Project",
             "type": "shell",
-            "command": "bash",
-            "args": [
-                "-c",
-                "if [[ $OSTYPE == 'darwin'* ]]; then g++ -std=c++17 -g ${file} src/glad_4.1.c -o ${fileDirname}/${fileBasenameNoExtension} -I${workspaceFolder}/include -I${workspaceFolder}/include/glad_mac -I${workspaceFolder}/include/KHR -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl -x c; else g++ -std=c++17 -g ${file} src/glad_4.6.c -o ${fileDirname}/${fileBasenameNoExtension} -I${workspaceFolder}/include -I${workspaceFolder}/include/glad_windows -I${workspaceFolder}/include/KHR -L/usr/local/lib -lsfml-graphics -lsfml-window -lsfml-system -ldl -x c; fi"
-            ],
+            "command": "make",
+            "args": ["build", "file=${file}"],
             "group": {
                 "kind": "build",
                 "isDefault": true
