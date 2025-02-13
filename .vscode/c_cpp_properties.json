@@ -5,7 +5,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include/glad_mac",
+                "${workspaceFolder}/include/glad_Darwin",
                 "${workspaceFolder}/include/KHR",
                 "${workspaceFolder}/include"
             ],
@@ -17,7 +17,7 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}/include",
-                    "${workspaceFolder}/include/glad_mac",
+                    "${workspaceFolder}/include/glad_Darwin",
                     "${workspaceFolder}/include/KHR"
                 ],
                 "limitSymbolsToIncludedHeaders": true
@@ -27,7 +27,7 @@
             "name": "Windows",
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/include/glad_windows",
+                "${workspaceFolder}/include/glad_Windows_NT",
                 "${workspaceFolder}/include/KHR"
             ],
             "defines": [],
@@ -38,7 +38,7 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}/include",
-                    "${workspaceFolder}/include/glad_windows",
+                    "${workspaceFolder}/include/glad_Windows_NT",
                     "${workspaceFolder}/include/KHR"
                 ],
                 "limitSymbolsToIncludedHeaders": true
