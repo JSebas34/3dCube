@@ -22,6 +22,30 @@ int main()
 
     window.setActive(true);
 
+    GLuint VBO = 0, VAO = 0;
+
+    string vertexCode = loadShader("Vshader.glsl");
+    string fragmentCode = loadShader("Fshader.glsl");
+
+    GLuint vertexShader = compileShaders(GL_VERTEX_SHADER, vertexCode);
+    GLuint fragmentShader = compileShaders(GL_FRAGMENT_SHADER, fragmentCode);
+
+    GLuint shaderProgram = glCreateProgram();       //program to attach shaders together
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+
+    glLinkProgram(shaderProgram);       //link the shaders to the prgram after being attatched
+
+    glDeleteShader(vertexShader);       //delete shaders since they are now in the program and rendered unnecessary
+    glDeleteShader(fragmentShader);
+
+    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");   //pos of atributtes
+
+    bufferProcess(VBO, VAO, posAttrib);
+
+    glEnableVertexAttribArray(posAttrib); //enables attributes
+
+
     bool running = true;
     
     while (running) {
@@ -36,38 +60,16 @@ int main()
             }
         }
 
-
-    string vertexCode = loadShader("Vshader.glsl");
-    string fragmentCode = loadShader("Fshader.glsl");
-
-    const char* vertexSource = vertexCode.c_str();      //turn into expected c string
-
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);     //create shader object
-    glShaderSource( vertexShader, 1, &vertexSource, NULL);  //species source code for the object
-    glCompileShader(vertexShader);
-
-    const char* fragmentSource = fragmentCode.c_str();      //turn into expected c string
-
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); //same procces as vertex shader
-    glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
-    glCompileShader(fragmentShader);
-
-    GLuint shaderProgram = glCreateProgram();       //program to attach shaders together
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-
-    glLinkProgram(shaderProgram);       //link the shaders to the prgram after being attatched
-
-    glDeleteShader(vertexShader);       //delete shaders since they are now in the program and rendered unnecessary
-    glDeleteShader(fragmentShader);
-
-    GLint posAttrib = glGetAttribLocation(shaderProgram, "position");   //pos of atributtes
-
-    glEnableVertexAttribArray(posAttrib); //enables attributes
+    glClear(GL_COLOR_BUFFER_BIT);
 
     glUseProgram(shaderProgram);        //use program
+
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES,0, sizeof(vertices));
+
+    glDrawArrays(GL_TRIANGLES,0,3);
+
+    glBindVertexArray(0);
+
 
 }
 return 0;

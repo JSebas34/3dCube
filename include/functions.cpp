@@ -1,3 +1,5 @@
+
+#include <SFML/OpenGL.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -21,11 +23,11 @@ string loadShader(const string& filePath) {
     return filebuffer.str();
 }
 
-void SetupBuffers(GLuint &VBO, GLuint &VAO, GLint posAttrib) {
+void bufferProcess(GLuint &VBO, GLuint &VAO, GLint posAttrib) {
     float vertices[] = {
             0.0f, 0.5f,
             0.5f, -0.5f,
-            -0.5, -0.5f
+            -0.5f, -0.5f
     };
 
     glGenBuffers(1, &VBO);      //generate buffer
@@ -42,4 +44,13 @@ void SetupBuffers(GLuint &VBO, GLuint &VAO, GLint posAttrib) {
 
     glBindBuffer(GL_ARRAY_BUFFER,0); //unbinds
     glBindVertexArray(0); //unbinds
+}
+
+GLuint compileShaders(GLuint type, string &source) {
+    GLuint shader = glCreateShader(type);
+    const char* shaderSource = source.c_str();
+    glShaderSource(shader,1,&shaderSource, NULL);
+    glCompileShader(shader);
+
+    return shader;
 }

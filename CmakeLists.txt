@@ -1,0 +1,31 @@
+# Minimum required version of CMake
+cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
+project(3dCube)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+
+set(SFML_DIR "C:/Users/jseba/Desktop/libraries/SFML-2.6.2")
+
+# Find SFML (ensure SFML is installed on your system)
+find_package(SFML 2.6.2 REQUIRED COMPONENTS graphics window system)
+
+# Set up Glad
+if (APPLE)
+    # macOS (OpenGL 4.1)
+    add_subdirectory(src/glad_darwin)
+elseif (WIN32)
+    # Windows (OpenGL 4.6)
+    add_subdirectory(src/glad_Windows_NT)
+endif()
+
+# Include directories for your source files
+include_directories(include)
+
+# Add the executable for your project
+add_executable(main main.cpp)
+
+# Link libraries to the executable (SFML and Glad)
+target_link_libraries(main sfml-graphics sfml-window sfml-system glad)

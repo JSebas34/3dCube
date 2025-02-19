@@ -63,7 +63,8 @@
         "__nullptr": "cpp",
         "compare": "cpp",
         "algorithm": "cpp",
-        "glad.h": "c"
+        "glad.h": "c",
+        "xstring": "cpp"
     },
     "makefile.configureOnOpen": true
 }
