@@ -7,10 +7,32 @@ project(3dCube)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
-set(SFML_DIR "C:/Users/jseba/Desktop/libraries/SFML-2.6.2")
+# Set the path to the SFML directory
+set(SFML_DIR "C:/Users/jseba/Desktop/libraries/SFML-3.0.0/lib/cmake/SFML")
+
+# Add the executable for your project
+add_executable(main main.cpp src/glad_Windows_NT/glad_4.6.c)
+
+# Include directories for Glad
+target_include_directories(main PRIVATE src/glad_Windows_NT)
+
+#force build mode
+set(CMAKE_BUILD_TYPE Release)
 
 # Find SFML (ensure SFML is installed on your system)
-find_package(SFML 2.6.2 REQUIRED COMPONENTS graphics window system)
+find_package(SFML 3 COMPONENTS System Window Graphics REQUIRED)
+if(SFML_FOUND)
+    include_directories(
+        C:/Users/jseba/Desktop/libraries/SFML-3.0.0/include
+        ${CMAKE_SOURCE_DIR}/src/glad_Windows_NT
+        )
+    target_link_libraries(main sfml-graphics sfml-window sfml-system)
+else()
+    message(FATAL_ERROR "SFML not found")
+endif()
+
+# Link libraries to the executable (SFML and Glad)
+
 
 # Set up Glad
 if (APPLE)
@@ -18,14 +40,8 @@ if (APPLE)
     add_subdirectory(src/glad_darwin)
 elseif (WIN32)
     # Windows (OpenGL 4.6)
-    add_subdirectory(src/glad_Windows_NT)
+    target_include_directories(main PRIVATE src/glad_Windows_NT)
 endif()
 
 # Include directories for your source files
 include_directories(include)
-
-# Add the executable for your project
-add_executable(main main.cpp)
-
-# Link libraries to the executable (SFML and Glad)
-target_link_libraries(main sfml-graphics sfml-window sfml-system glad)

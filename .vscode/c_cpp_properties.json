@@ -5,9 +5,10 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include/glad_Darwin",
+                "${workspaceFolder}/src/glad_Darwin",
                 "${workspaceFolder}/include/KHR",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src"
             ],
             "defines": [],
             "intelliSenseMode": "macos-gcc-x64",
@@ -17,7 +18,8 @@
             "browse": {
                 "path": [
                     "${workspaceFolder}/include",
-                    "${workspaceFolder}/include/glad_Darwin",
+                    "${workspaceFolder}/src",
+                    "${workspaceFolder}/src/glad_Darwin",
                     "${workspaceFolder}/include/KHR"
                 ],
                 "limitSymbolsToIncludedHeaders": true
@@ -27,18 +29,20 @@
             "name": "Windows",
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/include/glad_Windows_NT",
+                "${workspaceFolder}/src",
+                "${workspaceFolder}/src/glad_Windows_NT",
                 "${workspaceFolder}/include/KHR"
             ],
             "defines": [],
-            "intelliSenseMode": "windows-msvc-x64",
-            "compilerPath": "C:/MinGW/bin/g++.exe",
+            "intelliSenseMode": "${default}",
+            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "browse": {
                 "path": [
                     "${workspaceFolder}/include",
-                    "${workspaceFolder}/include/glad_Windows_NT",
+                    "${workspaceFolder}/src",
+                    "${workspaceFolder}/src/glad_Windows_NT",
                     "${workspaceFolder}/include/KHR"
                 ],
                 "limitSymbolsToIncludedHeaders": true

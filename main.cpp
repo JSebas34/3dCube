@@ -1,5 +1,5 @@
 #ifdef _WIN32
-    #include "glad_Windows_NT/glad.h"
+    #include "src\glad_Windows_NT\glad.h"
 #elif __APPLE__
     #include "glad_Darwin/glad.h"
 #else
@@ -7,20 +7,23 @@
 #endif
 #include "SFML/Graphics.hpp"
 #include <SFML/OpenGL.hpp>
+#include <SFML/Window.hpp>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <optional>
 #include <functions.cpp>
 
 using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1600, 800), "wakawaka");
+    
+    sf::Window window(sf::VideoMode({1600,800}), "wakawaka");
     window.setVerticalSyncEnabled(true);
 
-    window.setActive(true);
+    window.setActive(true); 
 
     GLuint VBO = 0, VAO = 0;
 
@@ -44,21 +47,15 @@ int main()
     bufferProcess(VBO, VAO, posAttrib);
 
     glEnableVertexAttribArray(posAttrib); //enables attributes
-
-
-    bool running = true;
     
-    while (running) {
-        sf::Event event;
+    while (window.isOpen()) {
 
-        while (window.pollEvent(event)) {
-            switch (event.type) {
-
-            case sf::Event::Closed:
-                running = false;
-                break;
-            }
+        while (const auto event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
         }
+    }
+        
 
     glClear(GL_COLOR_BUFFER_BIT);
 

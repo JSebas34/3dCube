@@ -64,7 +64,24 @@
         "compare": "cpp",
         "algorithm": "cpp",
         "glad.h": "c",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "*.tcc": "cpp",
+        "charconv": "cpp",
+        "concepts": "cpp",
+        "deque": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "utility": "cpp",
+        "format": "cpp",
+        "numbers": "cpp",
+        "span": "cpp",
+        "text_encoding": "cpp",
+        "cinttypes": "cpp"
     },
-    "makefile.configureOnOpen": true
+    "makefile.configureOnOpen": true,
+    "cmake.sourceDirectory": "C:/Users/jseba/Documents/GitHub/3dCube",
+    "C_Cpp.errorSquiggles": "disabled"
 }
