@@ -1,7 +1,7 @@
 #ifdef _WIN32
     #include "src\glad_Windows_NT\glad.h"
 #elif __APPLE__
-    #include "glad_Darwin/glad.h"
+    #include "glad_Darwin\glad.h"
 #else
     #error "Unsupported platform"
 #endif

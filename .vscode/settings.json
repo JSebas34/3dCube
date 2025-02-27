@@ -82,6 +82,6 @@
         "cinttypes": "cpp"
     },
     "makefile.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/jseba/Documents/GitHub/3dCube",
+    "cmake.sourceDirectory": "/Users/erickson/3dCube-1",
     "C_Cpp.errorSquiggles": "disabled"
 }

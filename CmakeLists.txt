@@ -7,41 +7,40 @@ project(3dCube)
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
-# Set the path to the SFML directory
-set(SFML_DIR "C:/Users/jseba/Desktop/libraries/SFML-3.0.0/lib/cmake/SFML")
-
-# Add the executable for your project
-add_executable(main main.cpp src/glad_Windows_NT/glad_4.6.c)
-
-# Include directories for Glad
-target_include_directories(main PRIVATE src/glad_Windows_NT)
-
-#force build mode
+# Set build type
 set(CMAKE_BUILD_TYPE Release)
 
-# Find SFML (ensure SFML is installed on your system)
+# Platform-specific library paths
+if (WIN32)
+    set(SFML_DIR "C:/Users/jseba/Desktop/libraries/SFML-3.0.0/lib/cmake/SFML")
+    set(GLAD_SRC src/glad_Windows_NT/glad_4.6.c)
+    include_directories(C:/Users/jseba/Desktop/libraries/SFML-3.0.0/include)
+elseif (APPLE)
+    set(SFML_DIR "/usr/local/opt/sfml/lib/cmake/SFML") 
+    set(GLAD_SRC src/glad_darwin/glad_4.1.c)
+
+
+    include_directories(/usr/local/opt/sfml/include)
+endif()
+
+# Add executable
+add_executable(main main.cpp ${GLAD_SRC})
+
+# Include directories for Glad
+if (WIN32)
+    target_include_directories(main PRIVATE src/glad_Windows_NT)
+elseif (APPLE)
+    target_include_directories(main PRIVATE src/glad_darwin)
+    target_link_directories(main PRIVATE "/usr/local/opt/sfml/lib")
+endif()
+
+# Find SFML
 find_package(SFML 3 COMPONENTS System Window Graphics REQUIRED)
 if(SFML_FOUND)
-    include_directories(
-        C:/Users/jseba/Desktop/libraries/SFML-3.0.0/include
-        ${CMAKE_SOURCE_DIR}/src/glad_Windows_NT
-        )
     target_link_libraries(main sfml-graphics sfml-window sfml-system)
 else()
     message(FATAL_ERROR "SFML not found")
 endif()
 
-# Link libraries to the executable (SFML and Glad)
-
-
-# Set up Glad
-if (APPLE)
-    # macOS (OpenGL 4.1)
-    add_subdirectory(src/glad_darwin)
-elseif (WIN32)
-    # Windows (OpenGL 4.6)
-    target_include_directories(main PRIVATE src/glad_Windows_NT)
-endif()
-
-# Include directories for your source files
+# Include directories for other source files
 include_directories(include)
